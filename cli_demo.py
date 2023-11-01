@@ -21,7 +21,7 @@ def load(tokenizer_path, checkpoint_path, use_cpu=False):
         device_map = "cuda"
 
     model = AutoModelForCausalLM.from_pretrained(
-        checkpoint_path, config=config, device_map=device_map, torch_dtype=torch.bfloat16, trust_remote_code=True).quantize(3)
+        checkpoint_path, config=config, torch_dtype=torch.bfloat16, trust_remote_code=True).quantize(3)
     model.generation_config = GenerationConfig.from_pretrained(
         checkpoint_path, trust_remote_code=True)
 
