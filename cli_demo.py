@@ -66,7 +66,7 @@ def extract_res(response):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Skywork-cli-demo")
-    parser.add_argument("-m", "--model_path", type=str, default="Skywork/Skywork-13B-base")
+    parser.add_argument("-m", "--model_path", type=str, default="Skywork/Skywork-13B-Base-8bits")
     parser.add_argument("-n", "--max_new_tokens", type=int, default=1000)
     parser.add_argument("-t", "--temperature", type=float, default=0.95)
     parser.add_argument("-p", "--top_p", type=float, default=0.8)
