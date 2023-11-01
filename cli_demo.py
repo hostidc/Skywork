@@ -21,7 +21,7 @@ def load(tokenizer_path, checkpoint_path, use_cpu=False):
         device_map = "cuda"
 
     model = AutoModelForCausalLM.from_pretrained(
-        checkpoint_path, config=config, torch_dtype=torch.bfloat16, trust_remote_code=True).quantize(4).cuda()
+        checkpoint_path, config=config, torch_dtype=torch.bfloat16, trust_remote_code=True).cuda()
     model.generation_config = GenerationConfig.from_pretrained(
         checkpoint_path, trust_remote_code=True)
 
@@ -66,7 +66,7 @@ def extract_res(response):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Skywork-cli-demo")
-    parser.add_argument("-m", "--model_path", type=str, default="Skywork/Skywork-13B-Base-8bits")
+    parser.add_argument("-m", "--model_path", type=str, default="/content/Skywork-13B-Base-8bits/snapshots/04fb932a1bd580a20323af5ac69b45a7a779eb9e")
     parser.add_argument("-n", "--max_new_tokens", type=int, default=1000)
     parser.add_argument("-t", "--temperature", type=float, default=0.95)
     parser.add_argument("-p", "--top_p", type=float, default=0.8)
