@@ -16,9 +16,9 @@ def load(tokenizer_path, checkpoint_path, use_cpu=False):
     print('Loading model ...')
     config = AutoConfig.from_pretrained(checkpoint_path, trust_remote_code=True)
     if use_cpu:
-        device_map = "cpu"
+        device_map = "auto"
     else:
-        device_map = "balanced_low_0"
+        device_map = "auto"
 
     model = AutoModelForCausalLM.from_pretrained(
         checkpoint_path, config=config, device_map=device_map, torch_dtype=torch.bfloat16, trust_remote_code=True)
@@ -66,7 +66,7 @@ def extract_res(response):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Skywork-cli-demo")
-    parser.add_argument("-m", "--model_path", type=str, default="skywork-13b-chat")
+    parser.add_argument("-m", "--model_path", type=str, default="Skywork/Skywork-13B-base")
     parser.add_argument("-n", "--max_new_tokens", type=int, default=1000)
     parser.add_argument("-t", "--temperature", type=float, default=0.95)
     parser.add_argument("-p", "--top_p", type=float, default=0.8)
