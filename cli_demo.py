@@ -16,12 +16,12 @@ def load(tokenizer_path, checkpoint_path, use_cpu=False):
     print('Loading model ...')
     config = AutoConfig.from_pretrained(checkpoint_path, trust_remote_code=True)
     if use_cpu:
-        device_map = "cuda"
+        device_map = "cpu"
     else:
-        device_map = "cuda"
+        device_map = "balanced_low_0"
 
     model = AutoModelForCausalLM.from_pretrained(
-        checkpoint_path, config=config, torch_dtype=torch.bfloat16, trust_remote_code=True).cuda()
+        checkpoint_path, config=config, device_map=device_map, torch_dtype=torch.bfloat16, trust_remote_code=True)
     model.generation_config = GenerationConfig.from_pretrained(
         checkpoint_path, trust_remote_code=True)
 
